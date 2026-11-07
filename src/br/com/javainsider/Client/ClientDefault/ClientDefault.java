@@ -77,5 +77,8 @@ public abstract class ClientDefault {
     protected abstract void findClientByID(String clientID);
     protected abstract void changeClientCpf(String clientID, String newClientCpf);
     protected abstract void changeClientID(String clientCpf, String newClientID);
+    protected abstract void changeClienteFullName(String clientCpf, String newFullName);
+    protected abstract void changeClienteAdress(String clientCpf, String newAdress);
+    protected abstract void changeClienteCellPhone(String clientCpf, String newCellPhone);
 
 }
