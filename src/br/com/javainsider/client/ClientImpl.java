@@ -1,12 +1,15 @@
 package br.com.javainsider.client;
 
 import br.com.javainsider.client.clientdefault.ClientDefault;
+import br.com.javainsider.client.clientinterface.ClientInterface;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientImpl extends ClientDefault {
+public class ClientImpl extends ClientDefault implements ClientInterface {
+
+//    private ClientInterface clientInterface;
 
     static List<ClientImpl> clientsList = new ArrayList<>();
 
@@ -14,8 +17,14 @@ public class ClientImpl extends ClientDefault {
         super(clientId, clientFirstName, clientMidleName, clientLastName, clientID, clientCpf, streetAdress, cepStreet, numberHouse, neighborhood, city, state, clientCellPhone, createdAt);
     }
 
+//    public ClientImpl(ClientInterface clientInterface){
+//        this.clientInterface = clientInterface;
+//    }
+
+    public ClientImpl(){}
+
     @Override
-    protected void createClient(String clientFirstName, String clientMidleName, String clientLastName, String clientID, String clientCpf, String streetAdress, String cepStreet, long numberHouse, String neigbborhood, String city, String state, String clientCellPhone) {
+    public void createClient(String clientFirstName, String clientMidleName, String clientLastName, String clientID, String clientCpf, String streetAdress, String cepStreet, long numberHouse, String neigbborhood, String city, String state, String clientCellPhone) {
         ClientImpl client = new ClientImpl(staticClientId, clientFirstName, clientMidleName, clientLastName, clientID, clientCpf, streetAdress, cepStreet, numberHouse, neigbborhood, city, state, clientCellPhone, LocalDate.now());
         clientsList.add(client);
     }
@@ -103,5 +112,11 @@ public class ClientImpl extends ClientDefault {
     @Override
     protected void deleteClient(String clientCpf) {
 
+    }
+
+    @Override
+    public void printClients() {
+        clientsList
+                .forEach(c -> IO.println(c));
     }
 }

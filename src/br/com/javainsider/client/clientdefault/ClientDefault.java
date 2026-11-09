@@ -1,6 +1,9 @@
 package br.com.javainsider.client.clientdefault;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Locale;
 
 public abstract class ClientDefault {
 
@@ -19,6 +22,7 @@ public abstract class ClientDefault {
     private String state;
     private String clientCellPhone;
     private LocalDate createdAt;
+    private Locale localeBr = Locale.forLanguageTag("pt-BR");
 
     protected ClientDefault(long clientId, String clientFirstName, String clientMidleName, String clientLastName, String clientID, String clientCpf, String streetAdress, String cepStreet, long numberHouse, String neighborhood, String city, String state, String clientCellPhone, LocalDate createdAt) {
         this.clientId = clientId;
@@ -36,6 +40,8 @@ public abstract class ClientDefault {
         this.clientCellPhone = clientCellPhone;
         this.createdAt = createdAt;
     }
+
+    protected ClientDefault(){}
 
     protected long getClientId() {
         return clientId;
@@ -167,5 +173,12 @@ public abstract class ClientDefault {
     protected abstract void setState(String clientCpf, String newState);
     protected abstract void setCreatedAT(String clientCpf, LocalDate newCreatedAt);
     protected abstract void deleteClient(String clientCpf);
+    protected abstract void printClients();
 
+    @Override
+    public String toString() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL);
+        String createdAtToString = createdAt.format(dateTimeFormatter).toString();
+        return String.format(localeBr, "Id: %d | Nome: %s %s %s | Id.: %s | CPF: %s | Endereço: %s | CEP: %s | Casa Nº: %d | Bairro: %s | Cidade: %s | Estado: %s | Tell. Contato: %s | Data Cadastro: %s ", clientId, clientFirstName, clientMidleName, clientLastName, clientID, clientCpf, streetAdress, cepStreet, numberHouse, neighborhood, city, state, clientCellPhone, createdAtToString);
+    }
 }
