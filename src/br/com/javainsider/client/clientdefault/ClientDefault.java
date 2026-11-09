@@ -1,11 +1,11 @@
-package br.com.javainsider.Client.ClientDefault;
+package br.com.javainsider.client.clientdefault;
 
 import java.time.LocalDate;
 
 public abstract class ClientDefault {
 
-    private long clientId;
-    private static long staticClientId;
+    private long clientId = staticClientId;
+    protected static long staticClientId = 10000;
     private String clientFirstName;
     private String clientMidleName;
     private String clientLastName;
@@ -18,9 +18,9 @@ public abstract class ClientDefault {
     private String city;
     private String state;
     private String clientCellPhone;
-    private LocalDate CreatedAt;
+    private LocalDate createdAt;
 
-    public ClientDefault(long clientId, String clientFirstName, String clientMidleName, String clientLastName, String clientID, String clientCpf, String streetAdress, String cepStreet, long numberHouse, String neighborhood, String city, String state, String clientCellPhone, LocalDate createdAt) {
+    protected ClientDefault(long clientId, String clientFirstName, String clientMidleName, String clientLastName, String clientID, String clientCpf, String streetAdress, String cepStreet, long numberHouse, String neighborhood, String city, String state, String clientCellPhone, LocalDate createdAt) {
         this.clientId = clientId;
         this.clientFirstName = clientFirstName;
         this.clientMidleName = clientMidleName;
@@ -34,7 +34,7 @@ public abstract class ClientDefault {
         this.city = city;
         this.state = state;
         this.clientCellPhone = clientCellPhone;
-        CreatedAt = createdAt;
+        this.createdAt = createdAt;
     }
 
     protected long getClientId() {
@@ -142,21 +142,30 @@ public abstract class ClientDefault {
     }
 
    protected LocalDate getCreatedAt() {
-        return CreatedAt;
+        return createdAt;
     }
 
     protected void setCreatedAt(LocalDate createdAt) {
-        CreatedAt = createdAt;
+        createdAt = createdAt;
     }
 
-    //TODO -> falta implementar mais métodos.
-    protected abstract void createClient(String clientFullName, String clientID, String clientCpf, String clientAdress, LocalDate createdAt, String clientCellPhone);
+    protected abstract void createClient(String clientFistName, String clientMidleName, String clientLastName, String clientID, String clientCpf, String streetAdress, String cepStreet, long numberHouse, String neighborhood, String city, String state, String clientCellPhone);
     protected abstract void findClientByCpf(String clientCpf);
     protected abstract void findClientByID(String clientID);
-    protected abstract void changeClientCpf(String clientID, String newClientCpf);
-    protected abstract void changeClientID(String clientCpf, String newClientID);
-    protected abstract void changeClientFullName(String clientCpf, String newFullName);
-    protected abstract void changeClientAdress(String clientCpf, String newAdress);
-    protected abstract void changeClientCellPhone(String clientCpf, String newCellPhone);
+    protected abstract void setClientCpf(String clientID, String newClientCpf);
+    protected abstract void setClientID(String clientCpf, String newClientID);
+    protected abstract void setClientFirstname(String clientCpf, String newClientFirstName);
+    protected abstract void setClientMidleName(String clientCpf, String newClientMidleName);
+    protected abstract void setClientLastName(String clientCpf, String newClientLastName);
+    protected abstract void setClientAdress(String clientCpf, String newAdress);
+    protected abstract void setClientCellPhone(String clientCpf, String newCellPhone);
+    protected abstract void setStreetAdress(String clientCpf, String newStreetCpf);
+    protected abstract void setCepStreet(String clientCpf, String newCepStreet);
+    protected abstract void setNumberHouse(String clientCpf, long newNumberHouse);
+    protected abstract void setNeighborhood(String clientCpf, String newNeighborhood);
+    protected abstract void setCity(String clientCpf, String newCity);
+    protected abstract void setState(String clientCpf, String newState);
+    protected abstract void setCreatedAT(String clientCpf, LocalDate newCreatedAt);
+    protected abstract void deleteClient(String clientCpf);
 
 }
