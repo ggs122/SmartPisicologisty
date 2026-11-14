@@ -8,7 +8,6 @@ public final class ClientUtils {
 
     private ClientUtils(){}
 
-
     private static boolean checkingID(String clientID) {
        boolean isIDFormat = clientID.matches("[0-9]{2}\\.[0-9]{3}\\.[0-9]{3}-[0-9]{1}");
 
@@ -57,10 +56,26 @@ public final class ClientUtils {
         return isformartCep;
     }
 
-    public static boolean checkingAll(String clientID, String checkingCpf, String clientCep) {
+    private static boolean checkingClientCellPhone(String clientCellPhone) {
+        boolean isFormarClientCellPhone = clientCellPhone.matches("\\([0-9]{2}\\)9[0-9]{4}-[0-9]{4}");
+
+        if (isFormarClientCellPhone) {
+            IO.println("----------------------------------------------");
+            IO.println(String.format(Locale.forLanguageTag("pt-BR"), "Formato de celular: %s -> válido.", clientCellPhone));
+            IO.println("----------------------------------------------");
+        } else {
+            IO.println("----------------------------------------------");
+            IO.println(String.format(Locale.forLanguageTag("pt-BR"), "Formato de celular: %s -> inválido.", clientCellPhone));
+            IO.println("----------------------------------------------");
+        }
+
+        return isFormarClientCellPhone;
+    }
+
+    public static boolean checkingAll(String clientID, String checkingCpf, String clientCep, String clientCellPhone) {
         boolean localCheckingAll;
 
-        if (checkingID(clientID) && checkingCPF(checkingCpf) && checkingCep(clientCep)) {
+        if (checkingID(clientID) && checkingCPF(checkingCpf) && checkingCep(clientCep) && checkingClientCellPhone(clientCellPhone)) {
             localCheckingAll = true;
 
         } else {
@@ -70,7 +85,8 @@ public final class ClientUtils {
                     "FORMATOS ACEITOS:\n\n" +
                     "Identidade formato: xx.xxx.xxx-x\n" +
                     "CPF formato: xxx.xxx.xxx-xx\n" +
-                    "CEP formato:xx.xxx-xxx");
+                    "CEP formato:xx.xxx-xxx\n" +
+                    "Celular formato:(xx)9xxxx-xxxx");
             IO.println("---------------------------------------------------------------");
         }
 

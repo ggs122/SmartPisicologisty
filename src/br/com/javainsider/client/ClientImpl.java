@@ -7,8 +7,11 @@ import br.com.javainsider.client.clientutils.ClientUtils;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ClientImpl extends ClientDefault {
+
+    private Locale localeBr = Locale.forLanguageTag("pt-BR");
 
     static List<ClientImpl> clientsList = new ArrayList<>();
 
@@ -21,10 +24,88 @@ public class ClientImpl extends ClientDefault {
     @Override
     protected void createClient(String clientFirstName, String clientMidleName, String clientLastName, String clientID, String clientCpf, String streetAdress, String cepStreet, long numberHouse, String neigbborhood, String city, String state, String clientCellPhone) {
 
-        if (ClientUtils.checkingAll(clientID, clientCpf, cepStreet)) {
-            ClientImpl client = new ClientImpl(staticClientId++, clientFirstName, clientMidleName, clientLastName, clientID, clientCpf, streetAdress, cepStreet, numberHouse, neigbborhood, city, state, clientCellPhone, LocalDate.now());
-            clientsList.add(client);
+        if (ClientUtils.checkingAll(clientID, clientCpf, cepStreet, clientCellPhone)) {
+            if (checkingSameClientFullName(clientFirstName, clientMidleName, clientLastName) == false) {
+                if (checkingSameID(clientID) == false) {
+                    if (checkingSameCpf(clientCpf) == false) {
+
+                        ClientImpl client = new ClientImpl(staticClientId++, clientFirstName, clientMidleName, clientLastName, clientID, clientCpf, streetAdress, cepStreet, numberHouse, neigbborhood, city, state, clientCellPhone, LocalDate.now());
+                        clientsList.add(client);
+                        IO.println("-----------------------------------------------------------------------------------------------------------------------------");
+                        IO.println(String.format(localeBr, "Cliente: %s %s %s -> Cadastrado com sucesso!", clientFirstName, clientMidleName, clientLastName));
+                        IO.println("-----------------------------------------------------------------------------------------------------------------------------");
+
+                    } else {
+                        IO.println("----------------------------------------------------------------------------------------------------");
+                        IO.println("Verifique se o número de identidade está corretos e cadastre novamente.");
+                        IO.println("----------------------------------------------------------------------------------------------------");
+                    }
+                } else {
+                    IO.println("----------------------------------------------------------------------------------------------------");
+                    IO.println("Verifique se o número de identidade está corretos e cadastre novamente.");
+                    IO.println("----------------------------------------------------------------------------------------------------");
+                }
+
+            } else {
+                IO.println("----------------------------------------------------------------------------------------------------");
+                IO.println("Verifique o nome completo correto e cadastre novamente.");
+                IO.println("----------------------------------------------------------------------------------------------------");
+            }
+
+        } else {
+            IO.println("---------------------------------------------------------------------------------------------------------------------------------------------------------");
+            IO.println(String.format(localeBr, "Formato de dados incorretos, impossível cadastrar o cliente -> %s %s %s", clientFirstName, clientMidleName, clientLastName));
+            IO.println("---------------------------------------------------------------------------------------------------------------------------------------------------------");
         }
+    }
+
+    private boolean checkingSameClientFullName(String clientFirstName, String clientMidleName, String clientLastName) {
+        boolean isSameClient = clientsList
+                .stream()
+                .anyMatch(c -> c.getClientFirstName().equalsIgnoreCase(clientFirstName) && c.getClientMidleName().equalsIgnoreCase(clientMidleName) && c.getClientLastName().equalsIgnoreCase(clientLastName));
+        if (isSameClient) {
+            IO.println("----------------------------------------------------------------------------------------------------");
+            IO.println(String.format(localeBr, "Cliente %s %s %s -> Já cadastrado anteriormente. Impossível cadastrar.", clientFirstName, clientMidleName, clientLastName));
+            IO.println("----------------------------------------------------------------------------------------------------");
+        } else {
+            IO.println("----------------------------------------------------------------------------------------------------");
+            IO.println(String.format(localeBr, "Cliente: %s %s %s -> Cadastrado com sucesso!", clientFirstName, clientMidleName, clientLastName));
+            IO.println("----------------------------------------------------------------------------------------------------");
+        }
+
+        return isSameClient;
+    }
+
+    private boolean checkingSameID(String clientID) {
+       boolean isSameClientID = clientsList
+                .stream()
+                .anyMatch(c -> c.getClientID().equals(clientID));
+       if (isSameClientID) {
+           IO.println("----------------------------------------------------------------------------------------------------");
+           IO.println(String.format(localeBr, "Identidade Nº %s -> Já cadastrado anteriormente. Impossível cadastrar.", clientID));
+           IO.println("----------------------------------------------------------------------------------------------------");
+       } else {
+           IO.println("----------------------------------------------------------------------------------------------------");
+           IO.println(String.format(localeBr, "Identidade Nº %s -> cadastrado com sucesso.", clientID));
+           IO.println("----------------------------------------------------------------------------------------------------");
+       }
+       return isSameClientID;
+    }
+
+    private boolean checkingSameCpf(String clientCpf) {
+        boolean isSameClientCpf = clientsList
+                .stream()
+                .anyMatch(c -> c.getClientID().equals(clientCpf));
+        if (isSameClientCpf) {
+            IO.println("----------------------------------------------------------------------------------------------------");
+            IO.println(String.format(localeBr, "CPF Nº %s -> Já cadastrado anteriormente. Impossível cadastrar.", clientCpf));
+            IO.println("----------------------------------------------------------------------------------------------------");
+        } else {
+            IO.println("----------------------------------------------------------------------------------------------------");
+            IO.println(String.format(localeBr, "CPF Nº %s -> cadastrado com sucesso.", clientCpf));
+            IO.println("----------------------------------------------------------------------------------------------------");
+        }
+        return isSameClientCpf;
     }
 
     @Override

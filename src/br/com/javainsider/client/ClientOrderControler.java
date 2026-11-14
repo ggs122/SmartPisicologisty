@@ -1,7 +1,5 @@
 package br.com.javainsider.client;
 
-import br.com.javainsider.client.clientinterface.ClientInterface;
-
 public class ClientOrderControler {
 
     private ClientImpl client = new ClientImpl();
