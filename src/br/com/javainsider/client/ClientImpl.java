@@ -2,6 +2,7 @@ package br.com.javainsider.client;
 
 import br.com.javainsider.client.clientdefault.ClientDefault;
 import br.com.javainsider.client.clientinterface.ClientInterface;
+import br.com.javainsider.client.clientutils.ClientUtils;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,8 +20,11 @@ public class ClientImpl extends ClientDefault {
 
     @Override
     protected void createClient(String clientFirstName, String clientMidleName, String clientLastName, String clientID, String clientCpf, String streetAdress, String cepStreet, long numberHouse, String neigbborhood, String city, String state, String clientCellPhone) {
-        ClientImpl client = new ClientImpl(staticClientId++, clientFirstName, clientMidleName, clientLastName, clientID, clientCpf, streetAdress, cepStreet, numberHouse, neigbborhood, city, state, clientCellPhone, LocalDate.now());
-        clientsList.add(client);
+
+        if (ClientUtils.checkingAll(clientID, clientCpf, cepStreet)) {
+            ClientImpl client = new ClientImpl(staticClientId++, clientFirstName, clientMidleName, clientLastName, clientID, clientCpf, streetAdress, cepStreet, numberHouse, neigbborhood, city, state, clientCellPhone, LocalDate.now());
+            clientsList.add(client);
+        }
     }
 
     @Override
@@ -110,7 +114,16 @@ public class ClientImpl extends ClientDefault {
 
     @Override
     protected void printClients() {
-        clientsList
-                .forEach(c -> IO.println(c));
+        if (!clientsList.isEmpty()) {
+            IO.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+           IO.println("> Lista de Clientes <");
+            clientsList
+                    .forEach(c -> IO.println(c));
+            IO.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        } else {
+            IO.println("Clientes não cadastrados, nada para mostrar.");
+        }
+
+
     }
 }
