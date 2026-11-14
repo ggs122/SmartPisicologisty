@@ -179,6 +179,6 @@ public abstract class ClientDefault {
     public String toString() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL);
         String createdAtToString = createdAt.format(dateTimeFormatter).toString();
-        return String.format(localeBr, "Id: %d | Nome: %s %s %s | Id.: %s | CPF: %s | Endereço: %s | CEP: %s | Casa Nº: %d | Bairro: %s | Cidade: %s | Estado: %s | Tell. Contato: %s | Data Cadastro: %s ", clientId, clientFirstName, clientMidleName, clientLastName, clientID, clientCpf, streetAdress, cepStreet, numberHouse, neighborhood, city, state, clientCellPhone, createdAtToString);
+        return String.format(localeBr, "Id: %d | Nome: %s %s %-25s | ID.: %s | CPF: %s | Endereço: %-25s | CEP: %s | Casa Nº: %d | Bairro: %-25s | Cidade: %-15s | Estado: %s | Tell. Contato: %s | Data Cadastro: %s ", clientId, clientFirstName, clientMidleName, clientLastName, clientID, clientCpf, streetAdress, cepStreet, numberHouse, neighborhood, city, state, clientCellPhone, createdAtToString);
     }
 }

@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientImpl extends ClientDefault implements ClientInterface {
+public class ClientImpl extends ClientDefault {
 
     static List<ClientImpl> clientsList = new ArrayList<>();
 
@@ -15,11 +15,11 @@ public class ClientImpl extends ClientDefault implements ClientInterface {
         super(clientId, clientFirstName, clientMidleName, clientLastName, clientID, clientCpf, streetAdress, cepStreet, numberHouse, neighborhood, city, state, clientCellPhone, createdAt);
     }
 
-    public ClientImpl(){}
+    protected ClientImpl(){}
 
     @Override
-    public void createClient(String clientFirstName, String clientMidleName, String clientLastName, String clientID, String clientCpf, String streetAdress, String cepStreet, long numberHouse, String neigbborhood, String city, String state, String clientCellPhone) {
-        ClientImpl client = new ClientImpl(staticClientId, clientFirstName, clientMidleName, clientLastName, clientID, clientCpf, streetAdress, cepStreet, numberHouse, neigbborhood, city, state, clientCellPhone, LocalDate.now());
+    protected void createClient(String clientFirstName, String clientMidleName, String clientLastName, String clientID, String clientCpf, String streetAdress, String cepStreet, long numberHouse, String neigbborhood, String city, String state, String clientCellPhone) {
+        ClientImpl client = new ClientImpl(staticClientId++, clientFirstName, clientMidleName, clientLastName, clientID, clientCpf, streetAdress, cepStreet, numberHouse, neigbborhood, city, state, clientCellPhone, LocalDate.now());
         clientsList.add(client);
     }
 
@@ -109,7 +109,7 @@ public class ClientImpl extends ClientDefault implements ClientInterface {
     }
 
     @Override
-    public void printClients() {
+    protected void printClients() {
         clientsList
                 .forEach(c -> IO.println(c));
     }
