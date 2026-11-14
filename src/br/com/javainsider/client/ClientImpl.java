@@ -9,17 +9,11 @@ import java.util.List;
 
 public class ClientImpl extends ClientDefault implements ClientInterface {
 
-//    private ClientInterface clientInterface;
-
     static List<ClientImpl> clientsList = new ArrayList<>();
 
     protected ClientImpl(long clientId, String clientFirstName, String clientMidleName, String clientLastName, String clientID, String clientCpf, String streetAdress, String cepStreet, long numberHouse, String neighborhood, String city, String state, String clientCellPhone, LocalDate createdAt) {
         super(clientId, clientFirstName, clientMidleName, clientLastName, clientID, clientCpf, streetAdress, cepStreet, numberHouse, neighborhood, city, state, clientCellPhone, createdAt);
     }
-
-//    public ClientImpl(ClientInterface clientInterface){
-//        this.clientInterface = clientInterface;
-//    }
 
     public ClientImpl(){}
 
