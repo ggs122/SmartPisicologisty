@@ -10,6 +10,15 @@ public class ClientOrderControler {
         client.createClient(clientFirstName, clientMidleName, clientLastName, clientID, clientCpf, streetAdress, cepStreet, numberHouse, neigbborhood, city, state, clientCellPhone);
     }
 
+
+    public ClientImpl orderControllerFindClientByCpf(String clientCpf) {
+        return client.findClientByCpf(clientCpf);
+    }
+
+    public ClientImpl orderControllerFindClientByID(String clientID) {
+        return client.findClientByID(clientID);
+    }
+
     public void orderControlerPrintClient() {
         client.printClients();
     }

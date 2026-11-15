@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class ClientImpl extends ClientDefault {
 
@@ -109,12 +110,68 @@ public class ClientImpl extends ClientDefault {
     }
 
     @Override
-    protected void findClientByCpf(String clientCpf) {
+    protected ClientImpl findClientByCpf(String clientCpf) {
+       boolean isSimilarCpf = clientsList
+                .stream()
+                .anyMatch(c -> c.getClientCpf().equals(clientCpf));
+
+       if (isSimilarCpf) {
+           clientsList
+                   .stream()
+                   .filter(c -> c.getClientCpf().equals(clientCpf))
+                   .forEach(c -> {
+                       IO.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                       IO.println("Cliente encontrado:");
+                       IO.println();
+                       IO.println(c);
+                       IO.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                   });
+       } else {
+           IO.println("-------------------------------------------------------------------------------");
+           IO.println(String.format(localeBr, "CPF Nº %s -> Inválido ou não cadastrado.", clientCpf));
+           IO.println("-------------------------------------------------------------------------------");
+       }
+
+
+   return clientsList
+               .stream()
+               .filter(c -> c.getClientCpf().equals(clientCpf))
+               .findFirst()
+               .orElse(new ClientImpl(0, "","", "", "", "", "", "", 0, "", "", "", "", LocalDate.of(0001, 01, 01)));
+
 
     }
 
     @Override
-    protected void findClientByID(String clientID) {
+    protected ClientImpl findClientByID(String clientID) {
+        boolean isSimilarCpf = clientsList
+                .stream()
+                .anyMatch(c -> c.getClientID().equals(clientID));
+
+        if (isSimilarCpf) {
+            clientsList
+                    .stream()
+                    .filter(c -> c.getClientID().equals(clientID))
+                    .forEach(c -> {
+                        IO.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                        IO.println("Cliente encontrado:");
+                        IO.println();
+                        IO.println(c);
+                        IO.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                    });
+        } else {
+            IO.println("-------------------------------------------------------------------------------");
+            IO.println(String.format(localeBr, "Identidade Nº %s -> Inválido ou não cadastrado.", clientID));
+            IO.println("-------------------------------------------------------------------------------");
+        }
+
+
+        return clientsList
+                .stream()
+                .filter(c -> c.getClientID().equals(clientID))
+                .findFirst()
+                .orElse(new ClientImpl(0, "","", "", "", "", "", "", 0, "", "", "", "", LocalDate.of(0001, 01, 01)));
+
 
     }
 
@@ -197,7 +254,7 @@ public class ClientImpl extends ClientDefault {
     protected void printClients() {
         if (!clientsList.isEmpty()) {
             IO.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-           IO.println("> Lista de Clientes <");
+            IO.println("> Lista de Clientes <");
             clientsList
                     .forEach(c -> IO.println(c));
             IO.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");

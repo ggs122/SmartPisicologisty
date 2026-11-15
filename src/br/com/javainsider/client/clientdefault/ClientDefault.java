@@ -1,5 +1,7 @@
 package br.com.javainsider.client.clientdefault;
 
+import br.com.javainsider.client.ClientImpl;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -156,8 +158,8 @@ public abstract class ClientDefault {
     }
 
     protected abstract void createClient(String clientFistName, String clientMidleName, String clientLastName, String clientID, String clientCpf, String streetAdress, String cepStreet, long numberHouse, String neighborhood, String city, String state, String clientCellPhone);
-    protected abstract void findClientByCpf(String clientCpf);
-    protected abstract void findClientByID(String clientID);
+    protected abstract ClientImpl findClientByCpf(String clientCpf);
+    protected abstract ClientImpl findClientByID(String clientID);
     protected abstract void setClientCpf(String clientID, String newClientCpf);
     protected abstract void setClientID(String clientCpf, String newClientID);
     protected abstract void setClientFirstname(String clientCpf, String newClientFirstName);
