@@ -17,6 +17,14 @@ public class App {
 
         orderControler.orderControllerSetClientCpf("21.141.758-5", "206.568.985-70");
 
+        orderControler.orderControllerSetClientID("209.568.985-70", "23.250.760-9");
+
+        orderControler.orderControllerSetClientFirstName("206.568.985-70", "Rogéria");
+
+        orderControler.orderControllerSetClientMidleName("206.568.985-70", "Silva");
+
+        orderControler.orderControllerSetLastName("206.568.985-70", "de Lima");
+
         orderControler.orderControlerPrintClient();
 
     }

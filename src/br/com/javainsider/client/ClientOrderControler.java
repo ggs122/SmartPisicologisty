@@ -23,6 +23,22 @@ public class ClientOrderControler {
         client.setClientCpf(clientID, newClientCpf);
     }
 
+    public void orderControllerSetClientID(String clientCpf, String newClientID) {
+        client.setClientID(clientCpf, newClientID);
+    }
+
+    public void orderControllerSetClientFirstName(String clientCpf, String newClientFirstName) {
+        client.setClientFirstname(clientCpf, newClientFirstName);
+    }
+
+    public void orderControllerSetClientMidleName(String clientCpf, String newClientMidleName) {
+        client.setClientMidleName(clientCpf, newClientMidleName);
+    }
+
+    public void orderControllerSetLastName(String clientCpf, String newClientLastName) {
+        client.setClientLastName(clientCpf, newClientLastName);
+    }
+
     public void orderControlerPrintClient() {
         client.printClients();
     }

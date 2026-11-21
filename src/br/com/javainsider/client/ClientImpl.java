@@ -197,22 +197,100 @@ public class ClientImpl extends ClientDefault {
 
     @Override
     protected void setClientID(String clientCpf, String newClientID) {
+       boolean isFormatClientID = ClientUtils.checkingID(newClientID);
+
+        boolean isSimilarClientCpf = clientsList
+                .stream()
+                .anyMatch(c -> c.getClientCpf().equals(clientCpf));
+        if (isFormatClientID) {
+            if (isSimilarClientCpf) {
+                clientsList
+                        .stream()
+                        .filter(c -> c.getClientCpf().equals(clientCpf))
+                        .forEach(c -> {
+                            c.setClientID(newClientID);
+                            IO.println(String.format(localeBr, "Cliente Nome: %s %s %s, Identidade alterado para: %s -> com sucesso!", c.getClientFirstName(), c.getClientMidleName(), c.getClientLastName(), c.getClientID()));
+                        });
+            } else {
+                IO.println(String.format(localeBr, "CPF %s, inválido ou inexistente -> Impossível alterar a identidade para: %s",clientCpf ,newClientID));
+            }
+
+        } else {
+            IO.println(String.format(localeBr, "Formato de identidade %s -> inválido.", newClientID));
+        }
 
     }
 
     @Override
     protected void setClientFirstname(String clientCpf, String newClientFirstName) {
+       boolean isFormatCpf = ClientUtils.checkingCPF(clientCpf);
+       boolean isSimilarCpf = clientsList
+                .stream()
+                .anyMatch(c -> c.getClientCpf().equals(clientCpf));
 
+       if (isFormatCpf) {
+           if (isSimilarCpf) {
+               clientsList
+                       .stream()
+                       .filter(c -> c.getClientCpf().equals(clientCpf))
+                       .forEach(c -> {
+                           c.setClientFirstName(newClientFirstName);
+                           IO.println(String.format(localeBr, "Cliente CPF Nº %s -> Nome alterado para: %s, com sucesso!", c.getClientCpf(), c.getClientFirstName()));
+                       });
+           } else {
+               IO.println(String.format(localeBr, "CPF Nº %s -> Não encontrado", clientCpf));
+           }
+       } else {
+           IO.println(String.format(localeBr, "Impossível alterar o nome do cliente para: %s com o CPF %s informado!", newClientFirstName, clientCpf));
+       }
     }
 
     @Override
     protected void setClientMidleName(String clientCpf, String newClientMidleName) {
+        boolean isFormatCpf = ClientUtils.checkingCPF(clientCpf);
+        boolean isSimilarCpf = clientsList
+                .stream()
+                .anyMatch(c -> c.getClientCpf().equals(clientCpf));
 
+        if (isFormatCpf) {
+            if (isSimilarCpf) {
+                clientsList
+                        .stream()
+                        .filter(c -> c.getClientCpf().equals(clientCpf))
+                        .forEach(c -> {
+                            c.setClientMidleName(newClientMidleName);
+                            IO.println(String.format(localeBr, "Cliente CPF Nº %s -> Nome do meio alterado para: %s, com sucesso!", c.getClientCpf(), c.getClientMidleName()));
+                        });
+            } else {
+                IO.println(String.format(localeBr, "CPF Nº %s -> Não encontrado", clientCpf));
+            }
+        } else {
+            IO.println(String.format(localeBr, "Impossível alterar o nome do cliente para: %s com o CPF %s informado!", newClientMidleName, clientCpf));
+        }
     }
 
     @Override
     protected void setClientLastName(String clientCpf, String newClientLastName) {
+        boolean isFormatCpf = ClientUtils.checkingCPF(clientCpf);
+        boolean isSimilarCpf = clientsList
+                .stream()
+                .anyMatch(c -> c.getClientCpf().equals(clientCpf));
 
+        if (isFormatCpf) {
+            if (isSimilarCpf) {
+                clientsList
+                        .stream()
+                        .filter(c -> c.getClientCpf().equals(clientCpf))
+                        .forEach(c -> {
+                            c.setClientLastName(newClientLastName);
+                            IO.println(String.format(localeBr, "Cliente CPF Nº %s -> último nome alterado para: %s, com sucesso!", c.getClientCpf(), c.getClientLastName()));
+                        });
+            } else {
+                IO.println(String.format(localeBr, "CPF Nº %s -> Não encontrado", clientCpf));
+            }
+        } else {
+            IO.println(String.format(localeBr, "Impossível alterar o último nome do cliente para: %s com o CPF %s informado!", newClientLastName, clientCpf));
+        }
     }
 
     @Override

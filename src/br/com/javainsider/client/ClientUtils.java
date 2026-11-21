@@ -8,7 +8,7 @@ public final class ClientUtils {
 
     private ClientUtils(){}
 
-    private static boolean checkingID(String clientID) {
+    protected static boolean checkingID(String clientID) {
        boolean isIDFormat = clientID.matches("[0-9]{2}\\.[0-9]{3}\\.[0-9]{3}-[0-9]{1}");
 
        if (isIDFormat) {
