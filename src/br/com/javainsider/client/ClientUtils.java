@@ -1,4 +1,4 @@
-package br.com.javainsider.client.clientutils;
+package br.com.javainsider.client;
 
 import java.util.Locale;
 
@@ -24,7 +24,7 @@ public final class ClientUtils {
        return isIDFormat;
     }
 
-    private static boolean checkingCPF(String clientCpf) {
+    protected static boolean checkingCPF(String clientCpf) {
 
        boolean isFormatcpf = clientCpf.matches("[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}-[0-9]{2}");
         if (isFormatcpf) {

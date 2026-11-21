@@ -19,6 +19,10 @@ public class ClientOrderControler {
         return client.findClientByID(clientID);
     }
 
+    public void orderControllerSetClientCpf(String clientID, String newClientCpf) {
+        client.setClientCpf(clientID, newClientCpf);
+    }
+
     public void orderControlerPrintClient() {
         client.printClients();
     }

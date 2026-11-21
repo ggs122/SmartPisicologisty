@@ -1,14 +1,11 @@
 package br.com.javainsider.client;
 
 import br.com.javainsider.client.clientdefault.ClientDefault;
-import br.com.javainsider.client.clientinterface.ClientInterface;
-import br.com.javainsider.client.clientutils.ClientUtils;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
 
 public class ClientImpl extends ClientDefault {
 
@@ -177,7 +174,25 @@ public class ClientImpl extends ClientDefault {
 
     @Override
     protected void setClientCpf(String clientID, String newClientCpf) {
-
+        boolean isCpfFormat = ClientUtils.checkingCPF(newClientCpf);
+        boolean isClientID = clientsList
+                .stream()
+                .anyMatch(c -> c.getClientID().equals(clientID));
+        if (isCpfFormat) {
+            if (isClientID) {
+                clientsList
+                    .stream()
+                    .filter(c -> c.getClientID().equals(clientID))
+                    .forEach(c -> {
+                        c.setClientCpf(newClientCpf);
+                        IO.println(String.format(localeBr, "Cliente Nome: %s %s %s, CPF alterado para: %s -> com sucesso!", c.getClientFirstName(), c.getClientMidleName(), c.getClientLastName(), c.getClientCpf()));
+                    });
+            } else {
+               IO.println(String.format(localeBr, "Formato de identidade inválido.\nou\nIdentidade inexistente.", clientID));
+            }
+        } else {
+            IO.println(String.format(localeBr, "Formato de CPF %s -> Inválido!", newClientCpf));
+        }
     }
 
     @Override

@@ -15,6 +15,8 @@ public class App {
 
         orderControler.orderControllerFindClientByID("22.151.768-9");
 
+        orderControler.orderControllerSetClientCpf("21.141.758-5", "206.568.985-70");
+
         orderControler.orderControlerPrintClient();
 
     }
