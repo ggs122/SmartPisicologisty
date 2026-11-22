@@ -294,8 +294,16 @@ public class ClientImpl extends ClientDefault {
     }
 
     @Override
-    protected void setClientAdress(String clientCpf, String newAdress) {
+    protected void setClientAdress(String clientCpf, String newStreetAdress) {
+       boolean isFormatCpf = ClientUtils.checkingCPF(clientCpf);
+       boolean isSimilarStreetAdress = clientsList
+                .stream()
+                .anyMatch(c -> c.getStreetAdress().equalsIgnoreCase(newStreetAdress));
+       if (isFormatCpf) {
 
+       } else {
+           IO.println(String.format(localeBr, "Impossível com o número de CPF informado: %s", clientCpf));
+       }
     }
 
     @Override
