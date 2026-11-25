@@ -293,15 +293,25 @@ public class ClientImpl extends ClientDefault {
         }
     }
 
-    //TODO -> Parei aqui.
     @Override
     protected void setClientAdress(String clientCpf, String newStreetAdress) {
        boolean isFormatCpf = ClientUtils.checkingCPF(clientCpf);
-       boolean isSimilarStreetAdress = clientsList
+       boolean isSimilarCpf = clientsList
                 .stream()
-                .anyMatch(c -> c.getStreetAdress().equalsIgnoreCase(newStreetAdress));
-       if (isFormatCpf) {
+                .anyMatch(c -> c.getClientCpf().equals(clientCpf));
 
+       if (isFormatCpf) {
+           if (isSimilarCpf) {
+               clientsList
+                       .stream()
+                       .filter(c -> c.getClientCpf().equals(clientCpf))
+                       .forEach(c -> {
+                           c.setStreetAdress(newStreetAdress);
+                           IO.println(String.format(localeBr, "Nome da rua alterado para: %s -> Sucesso!", c.getStreetAdress()));
+                       });
+           } else {
+               IO.println(String.format(localeBr, "Cliente com o CPF Nº %s, não encontrado. Impossível alterar o nome da rua para: %s", clientCpf, newStreetAdress));
+           }
        } else {
            IO.println(String.format(localeBr, "Impossível com o número de CPF informado: %s", clientCpf));
        }
@@ -309,17 +319,63 @@ public class ClientImpl extends ClientDefault {
 
     @Override
     protected void setClientCellPhone(String clientCpf, String newCellPhone) {
-
+       boolean isclientCpfFormat = ClientUtils.checkingCPF(clientCpf);
+       boolean isClientFormatCellPhone = ClientUtils.checkingClientCellPhone(newCellPhone);
+       boolean isSimilarCpf = clientsList
+               .stream()
+               .anyMatch(c -> c.getClientCpf().equals(clientCpf));
+       if (isclientCpfFormat) {
+           if (isSimilarCpf) {
+               if (isClientFormatCellPhone) {
+                   clientsList
+                           .stream()
+                           .filter(c -> c.getClientCpf().equals(clientCpf))
+                           .forEach(c -> {
+                               IO.println(String.format(localeBr, "Cliente com o CPF Nº %s -> Número de telefone alterado para: %s. Sucesso!", c.getClientCpf(),  c.setClientCellPhone(newCellPhone)));
+                           });
+               } else {
+                   IO.println(String.format(localeBr, "Impossível alterar o Nº do telefone com o formato informado -> %s", newCellPhone));
+               }
+           } else {
+               IO.println(String.format(localeBr, "Cliente com o CPF Nº %s, não encontrado -> Impossível alterar o nº do telefone para: %s!", clientCpf, newCellPhone));
+           }
+       } else {
+           IO.println(String.format(localeBr, "Impossível alterar o telefone Nº %s, como o CPF Nº %s informado.", newCellPhone, clientCpf));
+       }
     }
 
+    //TODO -> Já foi implementado a cima -> Redundância.
     @Override
     protected void setStreetAdress(String clientCpf, String newStreetCpf) {
-
+        //TODO -> Já foi implementado a cima -> Redundância.
     }
 
     @Override
     protected void setCepStreet(String clientCpf, String newCepStreet) {
+        boolean isFormatCpf = ClientUtils.checkingCPF(clientCpf);
+        boolean isFormatCep = ClientUtils.checkingCep(newCepStreet);
+        boolean isSimilarCpf = clientsList
+                .stream()
+                .anyMatch(c -> c.getClientCpf().equals(clientCpf));
 
+        if (isFormatCpf) {
+            if (isFormatCep) {
+                if (isSimilarCpf) {
+                    clientsList
+                            .stream()
+                            .filter(c -> c.getClientCpf().equals(clientCpf))
+                            .forEach(c -> {
+                                IO.println(String.format(localeBr, "Cliente com o CPF: %s, CEP alterado para: %s. Sucesso!", c.getClientCpf(), c.setCepStreet(newCepStreet)));
+                            });
+                } else {
+                    IO.println(String.format(localeBr, "Impossível realizar alterações com o nº do CPF %s, informado.", clientCpf));
+                }
+            } else {
+                IO.println(String.format(localeBr, "Impossível alterar o nº do CEP com o CEP Nº %s informado.", newCepStreet));
+            }
+        } else {
+            IO.println(String.format(localeBr, "Impossível alterar o número do CEP para: %s com o Nº de CPF: %s informado.", newCepStreet, clientCpf));
+        }
     }
 
     @Override

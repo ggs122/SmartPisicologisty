@@ -105,8 +105,9 @@ public abstract class ClientDefault {
         return cepStreet;
     }
 
-    protected void setCepStreet(String cepStreet) {
+    protected String setCepStreet(String cepStreet) {
         this.cepStreet = cepStreet;
+        return this.getCepStreet();
     }
 
     protected long getNumberHouse() {
@@ -145,9 +146,12 @@ public abstract class ClientDefault {
         return clientCellPhone;
     }
 
-    protected void setClientCellPhone(String clientCellPhone) {
+    protected String setClientCellPhone(String clientCellPhone) {
         this.clientCellPhone = clientCellPhone;
+        return this.getClientCellPhone();
     }
+
+
 
    protected LocalDate getCreatedAt() {
         return createdAt;

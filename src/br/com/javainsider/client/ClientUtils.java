@@ -40,7 +40,7 @@ public final class ClientUtils {
         return isFormatcpf;
     }
 
-    private static boolean checkingCep(String cepStreet) {
+    protected static boolean checkingCep(String cepStreet) {
         boolean isformartCep = cepStreet.matches("[0-9]{2}\\.[0-9]{3}-[0-9]{3}");
 
         if (isformartCep) {
@@ -56,7 +56,7 @@ public final class ClientUtils {
         return isformartCep;
     }
 
-    private static boolean checkingClientCellPhone(String clientCellPhone) {
+    protected static boolean checkingClientCellPhone(String clientCellPhone) {
         boolean isFormarClientCellPhone = clientCellPhone.matches("\\([0-9]{2}\\)9[0-9]{4}-[0-9]{4}");
 
         if (isFormarClientCellPhone) {
@@ -72,7 +72,7 @@ public final class ClientUtils {
         return isFormarClientCellPhone;
     }
 
-    public static boolean checkingAll(String clientID, String checkingCpf, String clientCep, String clientCellPhone) {
+    protected static boolean checkingAll(String clientID, String checkingCpf, String clientCep, String clientCellPhone) {
         boolean localCheckingAll;
 
         if (checkingID(clientID) && checkingCPF(checkingCpf) && checkingCep(clientCep) && checkingClientCellPhone(clientCellPhone)) {

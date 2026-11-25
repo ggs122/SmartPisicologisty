@@ -39,6 +39,18 @@ public class ClientOrderControler {
         client.setClientLastName(clientCpf, newClientLastName);
     }
 
+    public void orderControllerClientSetAdress(String clientCpf, String newStreetAdress) {
+        client.setClientAdress(clientCpf, newStreetAdress);
+    }
+
+    public void orderControllerClientSetCellPhone(String clientCpf, String newCellPhone) {
+        client.setClientCellPhone(clientCpf, newCellPhone);
+    }
+
+    public void orderControllerClientSetCep(String clientCpf, String newCepStreet) {
+        client.setCepStreet(clientCpf, newCepStreet);
+    }
+
     public void orderControlerPrintClient() {
         client.printClients();
     }

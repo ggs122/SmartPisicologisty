@@ -25,6 +25,12 @@ public class App {
 
         orderControler.orderControllerSetLastName("206.568.985-70", "de Lima");
 
+        orderControler.orderControllerClientSetAdress("206.568.985-70", "Rua da Lapa");
+
+        orderControler.orderControllerClientSetCellPhone("206.568.985-70", "(21)98548-6776");
+
+        orderControler.orderControllerClientSetCep("206.568.985-70", "30.815-350");
+
         orderControler.orderControlerPrintClient();
 
     }
