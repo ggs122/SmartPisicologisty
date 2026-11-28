@@ -114,16 +114,20 @@ public abstract class ClientDefault {
         return numberHouse;
     }
 
-    protected void setNumberHouse(long numberHouse) {
+    protected long setNumberHouse(long numberHouse) {
+
         this.numberHouse = numberHouse;
+        return this.getNumberHouse();
     }
 
     protected String getNeighborhood() {
         return neighborhood;
     }
 
-   protected void setNeighborhood(String neighborhood) {
+   protected String setNeighborhood(String neighborhood) {
+
         this.neighborhood = neighborhood;
+        return this.getNeighborhood();
     }
 
    protected String getCity() {

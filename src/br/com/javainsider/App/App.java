@@ -31,6 +31,10 @@ public class App {
 
         orderControler.orderControllerClientSetCep("206.568.985-70", "30.815-350");
 
+        orderControler.orderControllerClientSetNumberHouse("206.568.985-70", 11);
+
+        orderControler.orderControllerClientSetNeighborhood("206.568.985-70", "Guapimirim");
+
         orderControler.orderControlerPrintClient();
 
     }

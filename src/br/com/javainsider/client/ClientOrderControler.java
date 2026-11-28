@@ -51,6 +51,14 @@ public class ClientOrderControler {
         client.setCepStreet(clientCpf, newCepStreet);
     }
 
+    public void orderControllerClientSetNumberHouse(String clientCpf, long newNumberHouse) {
+        client.setNumberHouse(clientCpf, newNumberHouse);
+    }
+
+    public void orderControllerClientSetNeighborhood(String clientCpf, String newNeighborhood) {
+        client.setNeighborhood(clientCpf, newNeighborhood);
+    }
+
     public void orderControlerPrintClient() {
         client.printClients();
     }

@@ -380,12 +380,48 @@ public class ClientImpl extends ClientDefault {
 
     @Override
     protected void setNumberHouse(String clientCpf, long newNumberHouse) {
+       boolean isFormatCpf = ClientUtils.checkingCPF(clientCpf);
+       boolean isSimilarCpf = clientsList
+               .stream()
+               .anyMatch(c -> c.getClientCpf().equals(clientCpf));
 
+       if (isFormatCpf) {
+           if (isSimilarCpf) {
+               clientsList
+                       .stream()
+                       .filter(c -> c.getClientCpf().equals(clientCpf))
+                       .forEach(c -> {
+                           System.out.println(String.format(localeBr, "Número da casa alterado para -> Nª %d. Sucesso!", c.setNumberHouse(newNumberHouse)));
+                       });
+           } else {
+               IO.println(String.format(localeBr, "CPF %s encontrado", clientCpf));
+           }
+       } else {
+           IO.println(String.format(localeBr, "Impossível alterar o número da casa para: %s, com o formato de CPF %s digitado", newNumberHouse, clientCpf));
+       }
     }
 
     @Override
     protected void setNeighborhood(String clientCpf, String newNeighborhood) {
+        boolean isFormatCpf = ClientUtils.checkingCPF(clientCpf);
+        boolean isSimilarCpf = clientsList
+                .stream()
+                .anyMatch(c -> c.getClientCpf().equals(clientCpf));
 
+        if (isFormatCpf) {
+            if (isSimilarCpf) {
+                clientsList
+                        .stream()
+                        .filter(c -> c.getClientCpf().equals(clientCpf))
+                        .forEach(c -> {
+                            IO.println(String.format(localeBr, "Nome do bairro do cliente alterado para: %s", c.setNeighborhood(newNeighborhood)));
+                        });
+            } else {
+                IO.println(String.format(localeBr, "CPF Nº %s -> Não encontrado.", clientCpf));
+            }
+        } else {
+            IO.println(String.format(localeBr, "Impossível alterar o nome do bairro para: %s com o formato de CPF %s informado", newNeighborhood, clientCpf));
+        }
     }
 
     @Override
@@ -403,9 +439,13 @@ public class ClientImpl extends ClientDefault {
 
     }
 
+    //TODO -> Parei aqui.
     @Override
     protected void deleteClient(String clientCpf) {
-
+        boolean isFormatCpf = ClientUtils.checkingCPF(clientCpf);
+        boolean isSimilarCpf = clientsList
+                .stream()
+                .anyMatch(c -> c.getClientCpf().equals(clientCpf));
     }
 
     @Override
