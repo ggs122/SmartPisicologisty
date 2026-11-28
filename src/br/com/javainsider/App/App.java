@@ -35,6 +35,12 @@ public class App {
 
         orderControler.orderControllerClientSetNeighborhood("206.568.985-70", "Guapimirim");
 
+        orderControler.orderControllerClientSetDeleteClient("206.568.985-70");
+
+        orderControler.orderControllerClientSetCity("305.570.990-90", "Belforoxo");
+
+        orderControler.orderControllerClientSetState("305.570.990-90", "SP");
+
         orderControler.orderControlerPrintClient();
 
     }

@@ -134,16 +134,18 @@ public abstract class ClientDefault {
         return city;
     }
 
-    protected void setCity(String city) {
+    protected String setCity(String city) {
         this.city = city;
+        return this.getCity();
     }
 
     protected String getState() {
         return state;
     }
 
-    protected void setState(String state) {
+    protected String setState(String state) {
         this.state = state;
+        return this.getState();
     }
 
     protected String getClientCellPhone() {
@@ -181,7 +183,6 @@ public abstract class ClientDefault {
     protected abstract void setNeighborhood(String clientCpf, String newNeighborhood);
     protected abstract void setCity(String clientCpf, String newCity);
     protected abstract void setState(String clientCpf, String newState);
-    protected abstract void setCreatedAT(String clientCpf, LocalDate newCreatedAt);
     protected abstract void deleteClient(String clientCpf);
     protected abstract void printClients();
 

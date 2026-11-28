@@ -426,26 +426,70 @@ public class ClientImpl extends ClientDefault {
 
     @Override
     protected void setCity(String clientCpf, String newCity) {
-
+      boolean isFormatCpf = ClientUtils.checkingCPF(clientCpf);
+    boolean isSimilarCpf = clientsList
+              .stream()
+              .anyMatch(c -> c.getClientCpf().equals(clientCpf));
+      if (isFormatCpf) {
+          if (isSimilarCpf) {
+              clientsList
+                      .stream()
+                      .filter(c -> c.getClientCpf().equals(clientCpf))
+                      .forEach(c -> {
+                          IO.println(String.format(localeBr, "Cidade alterada para: %s. Sucesso!", c.setCity(newCity)));
+                      });
+          } else {
+              IO.println(String.format(localeBr, "Cliente CPF Nª, não encontrado -> Impossível alterar a cidade para: %s", clientCpf, newCity));
+          }
+      } else {
+          IO.println(String.format(localeBr, "Impossível alterar a cidade para: %s, com o formato de CPF: %s, informado.", newCity, clientCpf));
+      }
     }
 
     @Override
     protected void setState(String clientCpf, String newState) {
-
+        boolean isFormatCpf = ClientUtils.checkingCPF(clientCpf);
+        boolean isSimilarCpf = clientsList
+                .stream()
+                .anyMatch(c -> c.getClientCpf().equals(clientCpf));
+        if (isFormatCpf) {
+            if (isSimilarCpf) {
+                clientsList
+                        .stream()
+                        .filter(c -> c.getClientCpf().equals(clientCpf))
+                        .forEach(c -> {
+                            IO.println(String.format(localeBr, "Cidade alterada para: %s. Sucesso!", c.setState(newState)));
+                        });
+            } else {
+                IO.println(String.format(localeBr, "Cliente CPF Nª, não encontrado -> Impossível alterar o estado para: %s", clientCpf, newState));
+            }
+        }  else {
+            IO.println(String.format(localeBr, "Impossível alterar o estado para: %s, com o formato de CPF: %s, informado.", newState, clientCpf));
+        }
     }
 
-    @Override
-    protected void setCreatedAT(String clientCpf, LocalDate newCreatedAt) {
-
-    }
-
-    //TODO -> Parei aqui.
     @Override
     protected void deleteClient(String clientCpf) {
         boolean isFormatCpf = ClientUtils.checkingCPF(clientCpf);
         boolean isSimilarCpf = clientsList
                 .stream()
                 .anyMatch(c -> c.getClientCpf().equals(clientCpf));
+        if (isFormatCpf) {
+            if (isSimilarCpf) {
+                clientsList
+                        .stream()
+                        .filter(c -> c.getClientCpf().equals(clientCpf))
+                        .forEach(c -> {
+                            IO.println(String.format(localeBr, "Cliente: %s %s %s, com o CPF Nº %s -> deletado com sucesso!", c.getClientFirstName(), c.getClientMidleName(), c.getClientLastName(), c.getClientCpf()));
+                        });
+              clientsList
+                        .removeIf(c -> c.getClientCpf().equals(clientCpf));
+            } else {
+                IO.println(String.format(localeBr, "Cliente com o CPF: %s, não encontrado -> Impossível deletar.", clientCpf));
+            }
+        } else {
+            IO.println(String.format(localeBr, "Impossível deletar o cliente com o formato de CPF %s informado.", clientCpf));
+        }
     }
 
     @Override

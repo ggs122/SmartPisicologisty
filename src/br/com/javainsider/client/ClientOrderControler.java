@@ -59,6 +59,18 @@ public class ClientOrderControler {
         client.setNeighborhood(clientCpf, newNeighborhood);
     }
 
+    public void orderControllerClientSetDeleteClient(String clientCpf) {
+        client.deleteClient(clientCpf);
+    }
+
+    public void orderControllerClientSetCity(String clientCpf, String newCity) {
+        client.setCity(clientCpf, newCity);
+    }
+
+    public void orderControllerClientSetState(String clientCpf, String newState) {
+        client.setState(clientCpf, newState);
+    }
+
     public void orderControlerPrintClient() {
         client.printClients();
     }
